@@ -15,7 +15,7 @@
 module load bedtools/2.30.0
 
 input_list=("WGcontrol" "9" "11" "13" "15" "17" "19")
-prefix=bin100_norm_RFD_cutoff50_bs0.1kb
+prefix=bin100_norm_RFD_cutoff-norm_bs0.1kb
 distance=501 # max distance between minus and plus feature 
 inputdir=normalised_RFD/
 
