@@ -35,7 +35,7 @@ for x in "${input_list[@]}"; do
     cat $inputdir/ClosestID_maxdist$distance\_$x\_$prefix\_PLUS.bedgraph | awk 'BEGIN { OFS="\t" } {if ($13 < 0 ) {print $1 "\t" $9 "\t" $2 "\t" (($4*-1)+$10)/2 "\t" $4 "\t" $10 "\t" $6 "\t" $13}}' > $inputdir/Plus_ORIs_$x\_$prefix\.bedgraph  &&  
 # combining the plus and minus ORIs and removing all doublons and all with one identical start or end point while keeping the smaller feature
     cat $inputdir/Plus_ORIs_$x\_$prefix\.bedgraph  $inputdir/Minus_ORIs_$x\_$prefix\.bedgraph | sort -k1,1 -k2,2n |  awk '!a[$1 $2 $3]++' |   awk '!seen[$1 $2]++' |sort  -k1,1 -rk2 | awk '!seen[$1 $3]++' | sort -k1,1 -k2,2n > $inputdir/ORI_$x\_$prefix\.bedgraph && 
-# to filter the ORIs according to the score of their plus and Minus features
+# to filter the ORIs according to the score of their plus and Minus features, on the mean or the minus and plus sepertate
 cat $inputdir/ORI_$x\_$prefix\.bedgraph | awk   'BEGIN { OFS="\t" } {if ($4 >= 0.3 ) {print $0} }' >  $inputdir/ORI_$x\_$prefix\_th0.3.bedgraph &&
 cat $inputdir/ORI_$x\_$prefix\.bedgraph | awk   'BEGIN { OFS="\t" } {if ($7 == "+" && $5 <= -0.2 && $6 >= 0.2 ) {print $0} else if ($7 == "-" && $5 >= 0.2 && $6 <= -0.2) {print $0} }' >  $inputdir/ORI_$x\_$prefix\_th0.2P+M.bedgraph &&
 cat $inputdir/ORI_$x\_$prefix\.bedgraph | awk   'BEGIN { OFS="\t" } {if ($7 == "+" && $5 <= -0.3 && $6 >= 0.3 ) {print $0} else if ($7 == "-" && $5 >= 0.3 && $6 <= -0.3) {print $0} }' >  $inputdir/ORI_$x\_$prefix\_th0.3P+M.bedgraph \
