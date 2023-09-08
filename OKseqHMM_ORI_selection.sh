@@ -15,9 +15,9 @@
 module load bedtools/2.30.0
 
 input_list=("WGcontrol" "9" "11" "13" "15" "17" "19")
-prefix=bin100_RFD_cutoff-norm_bs0.1kb
+prefix=427__RFD_cutoff-norm_bs0.1kb
 distance=501 # max distance between minus and plus feature 
-inputdir=RFD_output_427-2018_norm-mappedReads
+inputdir=RFD_output_427_norm-mappedReads
 
 for x in "${input_list[@]}"; do
 # adding the strand for later seperation in plus and minus files 
